@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-complete-guide",
+  "version": "1.0.0",
+  "description": "Complete Node.js Guide",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "ejs": "^2.6.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "express-jwt": "^7.7.7",
+    "joi": "^17.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "pug": "^3.0.2",
+    "rootpath": "^0.1.2",
+    "sequelize": "^6.25.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "sequelize-cli": "^6.5.2"
+  }
+}
