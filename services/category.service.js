@@ -1,4 +1,8 @@
 const Category = require('./../models/category');
+const customPagination = require('./../shares/customPagination');
+const customOrderSort = require('./../shares/customOrderSort');
+const customFilter = require('./../shares/customFilter');
+
 module.exports = {
   getCategory,
   getAll,
@@ -9,13 +13,23 @@ module.exports = {
 }
 
 async function getCategory(id) {
+
   const category = await Category.findByPk(id);
   if (!category) throw 'Category not found';
   return category;
 }
 
-async function getAll() {
-  return await Category.findAll()
+async function getAll(params) {
+  const { limit, offset } = customPagination(params.page, params.size)
+  const order = customOrderSort(params.order);
+  const where = {}
+  customFilter(where)
+  return await Category.findAndCountAll({
+    limit,
+    offset,
+    where,
+    order
+  })
 }
 
 async function getById(id) {

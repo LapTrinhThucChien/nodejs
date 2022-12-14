@@ -1,5 +1,8 @@
 const Post = require('./../models/post');
 
+const customPagination = require('./../shares/customPagination');
+const customOrderSort = require('./../shares/customOrderSort');
+const customFilter = require('./../shares/customFilter');
 module.exports = {
   getPost,
   getAll,
@@ -15,8 +18,20 @@ async function getPost(id) {
   return post
 }
 
-async function getAll() {
-  return await Post.findAll()
+async function getAll(params) {
+  const { limit, offset } = customPagination(params.page, params.size)
+  const order = customOrderSort(params.order);
+  const where = {
+    userId: params.userId,
+    categoryId: params.categoryId
+  }
+  customFilter(where)
+  return await Post.findAndCountAll({
+    limit,
+    offset,
+    where,
+    order
+  })
 }
 
 async function getById(id) {

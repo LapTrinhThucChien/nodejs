@@ -36,27 +36,27 @@ async function authenticate({ username, password }) {
     throw 'Username or password is incorrect';
   }
 
-  // const token = jsonwebtoken.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
-  const header = generateToken.generateHeader({
-    alg: "HS256",
-    typ: "JWT"
-  });
-  const payload = generateToken.generatePayload({
-    exp: 872990,
-    sub: user.id
-  });
-  // create HMAC (hase based message authentication code)
-  let signature = crypto.createHmac('sha256', config.secret);
+  const token = jsonwebtoken.sign({ sub: user.id }, config.secret, { expiresIn: '7d' });
+  // const header = generateToken.generateHeader({
+  //   alg: "HS256",
+  //   typ: "JWT"
+  // });
+  // const payload = generateToken.generatePayload({
+  //   exp: 872990,
+  //   sub: user.id
+  // });
+  // // create HMAC (hase based message authentication code)
+  // let signature = crypto.createHmac('sha256', config.secret);
 
-  const base64HeaderPayload = `${header}.${payload}`;
-  signature.update(base64HeaderPayload);
+  // const base64HeaderPayload = `${header}.${payload}`;
+  // signature.update(base64HeaderPayload);
 
-  // signature need to be convert base64
-  signature = signature.digest('base64');
+  // // signature need to be convert base64
+  // signature = signature.digest('base64');
 
-  signature = replaceSpecialChars(signature);
+  // signature = replaceSpecialChars(signature);
 
-  const token = `${header}.${payload}.${signature}`
+  // const token = `${header}.${payload}.${signature}`
   return {
     ...omitHash(user.get()),
     token

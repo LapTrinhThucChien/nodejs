@@ -12,7 +12,7 @@ module.exports = {
 }
 
 function getAll(req, res, next) {
-  postService.getAll()
+  postService.getAll(req.body)
     .then((post) => res.json(post))
     .catch(next)
 }
@@ -23,7 +23,7 @@ function getById(req, res, next) {
     .catch(next)
 }
 
-function schemaCreatePost (req, res, next){
+function schemaCreatePost(req, res, next) {
   const schema = Joi.object({
     title: Joi.string().required(),
     description: Joi.string().required(),

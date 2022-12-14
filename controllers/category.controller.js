@@ -13,7 +13,7 @@ module.exports = {
 }
 
 function getAll(req, res, next) {
-  categoryService.getAll()
+  categoryService.getAll(req.body)
     .then((category) => res.json(category))
     .catch(next)
 }
